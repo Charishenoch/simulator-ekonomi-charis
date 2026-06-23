@@ -1,0 +1,14 @@
+[theme]
+# Mengubah warna utama (termasuk oren di slider) menjadi Biru Youcare
+primaryColor = "#2F6AFA"
+
+# Mengubah warna background utama web
+backgroundColor = "#F4F7F9"
+
+# Mengubah warna background sidebar dan card
+secondaryBackgroundColor = "#FFFFFF"
+
+# Warna teks utama
+textColor = "#334155"
+
+font = "sans serif"
