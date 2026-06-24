@@ -206,29 +206,41 @@ st.write("")
 # 5. Visualisasi grafik Matplotlib
 st.markdown('<h3 style="color: #1E3A8A; font-weight: 800; font-size: 1.3rem; margin-left: 5px;">Perbandingan Tren Keuntungan</h3>', unsafe_allow_html=True)
 
-fig, ax = plt.subplots(figsize=(10, 3.5))
+fig, ax = plt.subplots(figsize=(10, 3.5)) 
 fig.patch.set_alpha(0.0)
-ax.set_facecolor('#EAEAEA')
+ax.set_facecolor('#EAEAEA') 
 
 color_baseline = '#CBD5E1' 
-color_skenario = '#007BFF' if delta >= 0 else '#EF4444'
+color_skenario = '#007BFF' if hasil_pred >= 0 else '#EF4444'
 
 bars = ax.bar(['Baseline\n(Bulan Lalu)', 'Skenario\n(Bulan Ini)'], [baseline_pred, hasil_pred], 
               color=[color_baseline, color_skenario], width=0.3, zorder=3)
 
 for bar in bars:
     yval = bar.get_height()
-    ax.text(bar.get_x() + bar.get_width()/2, yval + 3, f'{yval:.1f} Jt', 
-            ha='center', va='bottom', fontweight='bold', color='#1E3A8A', fontsize=12)
+    if yval >= 0:
+        offset = 5
+        va = 'bottom'
+    else:
+        offset = -5
+        va = 'top'
+        
+    ax.text(bar.get_x() + bar.get_width()/2, yval + offset, f'{yval:.1f} Jt', 
+            ha='center', va=va, fontweight='bold', color='#1E3A8A', fontsize=12)
 
-ax.set_ylim(0, max(baseline_pred, hasil_pred) * 1.3)
+min_y = min(0, hasil_pred)
+max_y = max(baseline_pred, hasil_pred)
+ax.set_ylim(min_y - abs(min_y)*0.4 if min_y < 0 else 0, max_y * 1.3)
+
+ax.axhline(0, color='#9CA3AF', linewidth=2, zorder=4)
+
 ax.yaxis.grid(True, linestyle='--', color='#D1D5DB', linewidth=1.5, zorder=0)
 ax.xaxis.grid(False)
 
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.spines['left'].set_visible(False)
-ax.spines['bottom'].set_color('#9CA3AF')
+ax.spines['bottom'].set_visible(False)
 
 ax.tick_params(axis='both', which='both', length=0, colors='#4B5563', labelsize=11)
 
