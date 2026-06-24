@@ -17,7 +17,7 @@ st.markdown("""
     }
     
     .stApp {
-        background-color: #EAEAEA; 
+        background-color: #F5F5F5; 
     }
     
     .block-container {
@@ -87,7 +87,7 @@ st.markdown("""
     
     /* Sidebar Styling */
     [data-testid="stSidebar"] {
-        background-color: #EAEAEA; /* Samain dengan background utama */
+        background-color: #EAEAEA;
         border-right: none;
     }
     
